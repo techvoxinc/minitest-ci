@@ -53,7 +53,9 @@ Alternatively, you can add the following code to your test runner setup:
     require 'minitest/autorun'
     require 'minitest/ci'
 
-    Minitest::Ci.report_dir = "#{ENV["CIRCLE_TEST_REPORTS"]}/reports"
+    if ENV["CIRCLECI"]
+      Minitest::Ci.report_dir = "#{ENV["CIRCLE_TEST_REPORTS"]}/reports"
+    end
 
     class MiniTest::Test
       # include other helpers, etc
