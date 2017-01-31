@@ -2,7 +2,7 @@ require 'fileutils'
 require 'cgi'
 
 module Minitest
-  class Ci
+  class Ci < Reporter
 
     VERSION = '3.1.0'
 
