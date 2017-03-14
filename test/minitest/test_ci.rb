@@ -141,7 +141,8 @@ class TestMinitest::TestCi < Minitest::Test
 
   def test_output
     output.rewind
-    expected = "\ngenerating ci files\n"
+    expected = "\n[Minitest::CI] Generating test report in JUnit XML format...\n"
+
     assert_equal expected, output.read
   end
 

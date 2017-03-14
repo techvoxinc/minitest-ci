@@ -55,7 +55,7 @@ module Minitest
     # Generate test report
     def report
       io.puts
-      io.puts 'generating ci files'
+      io.puts '[Minitest::CI] Generating test report in JUnit XML format...'
 
       Dir.chdir report_dir do
         results.each do |name, resultz|
