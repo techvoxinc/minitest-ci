@@ -14,6 +14,10 @@ module Minitest
     opts.on "--[no-]ci-clean", "Clean the CI report dir in between test runs. Default #{Ci.clean}" do |clean|
       options[:ci_clean] = clean
     end
+
+    opts.on "--working-dir DIR", "Set the working dir. Default to #{Ci.working_dir}" do |dir|
+      options[:working_dir] = dir
+    end
   end
 
 end
