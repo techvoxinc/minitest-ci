@@ -3,9 +3,6 @@ require 'cgi'
 
 module Minitest
   class Ci < Reporter
-
-    VERSION = '3.2.0'
-
     class << self
 
       ##
