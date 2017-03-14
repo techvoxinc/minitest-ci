@@ -59,8 +59,8 @@ module Minitest
 
       Dir.chdir report_dir do
         results.each do |name, resultz|
-          File.open "TEST-#{CGI.escape(name.to_s)}.xml"[0, 255], "w" do |f|
-            f.puts generate_results name, resultz
+          File.open(report_name(name), "w") do |f|
+            f.puts( generate_results(name, resultz) )
           end
         end
       end
@@ -133,5 +133,8 @@ module Minitest
       options.fetch(:ci_clean, self.class.clean)
     end
 
+    def report_name(name)
+      "TEST-#{CGI.escape(name.to_s.gsub(/\W+/, '_'))}.xml"[0, 255]
+    end
   end
 end
