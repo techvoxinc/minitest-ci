@@ -40,9 +40,12 @@ To configure the test output folder, use the "--ci-dir=" option, setting it in
 TESTOPTS.  On CircleCI, you might want to use something like this in your
 circle.yml:
 
+    machine:
+      environment:
+        TESTOPTS: "--ci-dir=$CIRCLE_TEST_REPORTS/reports"
     test:
       override:
-        - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+        - bundle exec rake test:
             parallel: true
             files:
               - test/**/*.rb
