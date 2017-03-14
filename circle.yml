@@ -1,5 +1,2 @@
 test:
-  pre:
-    - mkdir $CIRCLE_TEST_REPORTS/minitest
-  post:
-    - cp --verbose --recursive test/reports $CIRCLE_TEST_REPORTS
+  override: bundle exec rake --ci_dir $CIRCLE_TEST_REPORTS/minitest-ci
