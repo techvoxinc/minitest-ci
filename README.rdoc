@@ -6,7 +6,7 @@
 
 == DESCRIPTION:
 
-Minitest reporter plugin for CircleCI
+Minitest reporter plugin for [CircleCI](https://circleci.com/).
 
 This gem was made possible by YP.com
 
@@ -19,7 +19,8 @@ In order to use this gem, add it to your Gemfile:
 
     gem "minitest-ci"
 
-To make integration with CircleCI easier, make sure you have a ":test" task defined. You can do simply by adding the following to your Rakefile:
+To make integration with CircleCI easier, make sure you have a ":test" task defined.
+You can do this by simply adding the following to your Rakefile:
 
     require 'rake/testtask'
 
