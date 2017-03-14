@@ -6,8 +6,7 @@ module Minitest
     class << self
 
       ##
-      # Accessor method to change the report dir if you don't like the
-      # defaults. (defaults to "test/reports")
+      # Change the report directory # defaults. (defaults to "test/reports")
 
       attr_accessor :report_dir
 
@@ -17,7 +16,7 @@ module Minitest
       attr_accessor :clean
 
       ##
-      # Change the working direcotry. (defaults to `$PWD`)
+      # Change the working directory. (defaults to `$PWD`)
       attr_accessor :working_dir
     end
 
@@ -55,9 +54,9 @@ module Minitest
       io.puts '[Minitest::CI] Generating test report in JUnit XML format...'
 
       Dir.chdir report_dir do
-        results.each do |name, resultz|
+        results.each do |name, result|
           File.open(report_name(name), "w") do |f|
-            f.puts( generate_results(name, resultz) )
+            f.puts( generate_results(name, result) )
           end
         end
       end
