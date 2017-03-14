@@ -88,7 +88,7 @@ module Minitest
         end
       end
 
-      base = self.class.working_dir + '/'
+      base = working_dir + '/'
       xml = []
 
       xml << '<?xml version="1.0" encoding="UTF-8"?>'
@@ -119,6 +119,10 @@ module Minitest
       xml << "</testsuite>"
 
       xml
+    end
+
+    def working_dir
+      options.fetch(:working_dir, self.class.working_dir)
     end
 
     def report_dir
