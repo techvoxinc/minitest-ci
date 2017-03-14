@@ -3,14 +3,10 @@ require 'cgi'
 
 module Minitest
   class Ci < Reporter
-
-    VERSION = '3.1.0'
-
     class << self
 
       ##
-      # Accessor method to change the report dir if you don't like the
-      # defaults.
+      # Change the report directory. (defaults to "test/reports")
 
       attr_accessor :report_dir
 
@@ -18,6 +14,9 @@ module Minitest
       # Clean the report_dir between test runs? (defaults to true)
 
       attr_accessor :clean
+
+      ##
+      # Change the working directory. (defaults to `$PWD`)
       attr_accessor :working_dir
     end
 
@@ -48,14 +47,16 @@ module Minitest
       results[result.class] << result
     end
 
+    ##
+    # Generate test report
     def report
       io.puts
-      io.puts 'generating ci files'
+      io.puts '[Minitest::CI] Generating test report in JUnit XML format...'
 
       Dir.chdir report_dir do
-        results.each do |name, resultz|
-          File.open "TEST-#{CGI.escape(name.to_s)}.xml"[0, 255], "w" do |f|
-            f.puts generate_results name, resultz
+        results.each do |name, result|
+          File.open(report_name(name), "w") do |f|
+            f.puts( generate_results(name, result) )
           end
         end
       end
@@ -72,7 +73,7 @@ module Minitest
       results.each do |result|
         total_time += result.time
         assertions += result.assertions
-        # p result.failure.class
+
         case result.failure
         when Skip
           skips += 1
@@ -83,7 +84,7 @@ module Minitest
         end
       end
 
-      base = self.class.working_dir + '/'
+      base = working_dir + '/'
       xml = []
 
       xml << '<?xml version="1.0" encoding="UTF-8"?>'
@@ -116,6 +117,10 @@ module Minitest
       xml
     end
 
+    def working_dir
+      options.fetch(:working_dir, self.class.working_dir)
+    end
+
     def report_dir
       options.fetch(:ci_dir, self.class.report_dir)
     end
@@ -124,5 +129,8 @@ module Minitest
       options.fetch(:ci_clean, self.class.clean)
     end
 
+    def report_name(name)
+      "TEST-#{CGI.escape(name.to_s.gsub(/\W+/, '_'))}.xml"[0, 255]
+    end
   end
 end

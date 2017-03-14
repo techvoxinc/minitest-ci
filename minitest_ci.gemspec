@@ -2,9 +2,9 @@
 
 Gem::Specification.new do |s|
   s.name        = 'minitest-ci'
-  s.version     = '3.1.0'
+  s.version     = '3.2.0'
   s.platform    = Gem::Platform::RUBY
-  s.authors     = %w(bhenderson notnoop)
+  s.authors     = %w(zzak bhenderson notnoop)
   s.email       = ['sayhi@circleci.com']
   s.homepage    = 'https://github.com/circleci/minitest-ci'
   s.summary     = 'Minitest JUnit XML formatter'

@@ -1,4 +1,3 @@
-gem 'minitest'
 require "minitest/autorun"
 require "minitest/ci"
 
@@ -141,7 +140,8 @@ class TestMinitest::TestCi < Minitest::Test
 
   def test_output
     output.rewind
-    expected = "\ngenerating ci files\n"
+    expected = "\n[Minitest::CI] Generating test report in JUnit XML format...\n"
+
     assert_equal expected, output.read
   end
 
@@ -151,13 +151,13 @@ class TestMinitest::TestCi < Minitest::Test
   end
 
   def test_suitename_with_single_quotes
-    file = File.read "test/reports/TEST-spec%2Fwith%3A%3A%27punctuation%27.xml"
+    file = File.read "#{Minitest::Ci.report_dir}/TEST-spec_with_punctuation_.xml"
     suite = Nokogiri.parse(file).at_xpath('/testsuite')
     assert_equal "spec/with::'punctuation'", suite['name']
   end
 
   def test_suitename_with_double_quotes
-    file = File.read "test/reports/TEST-spec%2Fwith%3A%3A%22doublequotes%22.xml"
+    file = File.read "#{Minitest::Ci.report_dir}/TEST-spec_with_doublequotes_.xml"
     doc = Nokogiri.parse(file)
     suite = doc.at_xpath('/testsuite')
     testcase = doc.at_xpath('/testsuite/testcase')

@@ -1,9 +1,3 @@
-dependencies:
-  pre:
-    - gem install bundler --version=1.13.1
-
-test:
-  pre:
-    - mkdir $CIRCLE_TEST_REPORTS/minitest
-  post:
-    - cp --verbose --recursive test/reports $CIRCLE_TEST_REPORTS
+machine:
+  environment:
+    TESTOPTS: "--ci-dir=$CIRCLE_TEST_REPORTS/minitest-ci"
