@@ -72,7 +72,7 @@ module Minitest
       results.each do |result|
         total_time += result.time
         assertions += result.assertions
-        # p result.failure.class
+
         case result.failure
         when Skip
           skips += 1
