@@ -6,7 +6,7 @@ module Minitest
     class << self
 
       ##
-      # Change the report directory # defaults. (defaults to "test/reports")
+      # Change the report directory. (defaults to "test/reports")
 
       attr_accessor :report_dir
 
