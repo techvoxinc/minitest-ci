@@ -10,7 +10,7 @@ module Minitest
 
       ##
       # Accessor method to change the report dir if you don't like the
-      # defaults.
+      # defaults. (defaults to "test/reports")
 
       attr_accessor :report_dir
 
@@ -18,6 +18,9 @@ module Minitest
       # Clean the report_dir between test runs? (defaults to true)
 
       attr_accessor :clean
+
+      ##
+      # Change the working direcotry. (defaults to `$PWD`)
       attr_accessor :working_dir
     end
 
@@ -48,6 +51,8 @@ module Minitest
       results[result.class] << result
     end
 
+    ##
+    # Generate test report
     def report
       io.puts
       io.puts 'generating ci files'
