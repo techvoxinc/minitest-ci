@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'cgi'
+require 'time'
 
 module Minitest
   class Ci < Reporter
@@ -70,6 +71,7 @@ module Minitest
 
     def generate_results name, results
       total_time = assertions = errors = failures = skips = 0
+      timestamp = Time.now.iso8601
       results.each do |result|
         total_time += result.time
         assertions += result.assertions
@@ -88,8 +90,8 @@ module Minitest
       xml = []
 
       xml << '<?xml version="1.0" encoding="UTF-8"?>'
-      xml << "<testsuite time='%6f' skipped='%d' failures='%d' errors='%d' name=%p assertions='%d' tests='%d'>" %
-        [total_time, skips, failures, errors, escape(name), assertions, results.count]
+      xml << "<testsuite time='%6f' skipped='%d' failures='%d' errors='%d' name=%p assertions='%d' tests='%d' timestamp=%p>" %
+        [total_time, skips, failures, errors, escape(name), assertions, results.count, timestamp]
 
       results.each do |result|
         xml << "  <testcase time='%6f' file=%p name=%p assertions='%s'>" %
