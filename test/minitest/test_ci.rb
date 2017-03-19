@@ -72,6 +72,8 @@ class TestMinitest::TestCi < Minitest::Test
   end
 
   def setup
+    @timestamp = Time.now
+
     file = "test/reports/TEST-MockTestSuite.xml"
     @file = File.read file
     @doc = Nokogiri.parse @file
@@ -85,6 +87,16 @@ class TestMinitest::TestCi < Minitest::Test
     assert_equal "3", @doc['assertions']
     assert_equal "7", @doc['tests']
     assert_equal "MockTestSuite", @doc['name']
+  end
+
+  def test_testsuite_sets_timestamp
+    parsed_time = Time.parse(@doc['timestamp'])
+    assert parsed_time.between?(@timestamp-5, @timestamp+5)
+  end
+
+  def test_testsuite_timestamp_format
+    iso_8061_format = %r{\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}}
+    assert_match iso_8061_format, @doc['timestamp']
   end
 
   def test_testcase_count
