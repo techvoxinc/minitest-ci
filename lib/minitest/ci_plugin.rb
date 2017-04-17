@@ -3,12 +3,11 @@ require 'cgi'
 require 'time'
 
 module Minitest
-
-  def self.plugin_ci_init options
-    self.reporter << Ci.new(options[:io], options)
-  end
-
   def self.plugin_ci_options opts, options
+    opts.on "--ci-report", "Enable Minitest::Ci Reporting." do |dir|
+      Ci.report!
+    end
+
     opts.on "--ci-dir DIR", "Set the CI report dir. Default to #{Ci.report_dir}" do |dir|
       options[:ci_dir] = dir
     end
@@ -22,8 +21,26 @@ module Minitest
     end
   end
 
+  def self.plugin_ci_init options
+    if Ci.report?
+      self.reporter << Ci.new(options[:io], options)
+    end
+  end
+
   class Ci < Reporter
     class << self
+      ##
+      # Activates minitest/ci plugin as a Minitest reporter
+      def report!
+        @report = true
+      end
+
+      ##
+      # Is minitest/ci activated as a Minitest reporter?
+      def report?
+        @report ||= false
+      end
+
       ##
       # Change the report directory. (defaults to "test/reports")
       attr_accessor :report_dir
