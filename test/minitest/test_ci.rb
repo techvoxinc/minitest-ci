@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require "minitest/ci"
+require "minitest/ci_plugin"
 
 require 'stringio'
 require 'nokogiri'
@@ -65,7 +65,7 @@ reporter.report
 Minitest::Runnable.reset
 
 class TestMinitest; end
-class TestMinitest::TestCi < Minitest::Test
+class TestMinitest::TestCiPlugin < Minitest::Test
 
   def output
     $ci_io
