@@ -35,15 +35,15 @@ class MockTestSuite < Minitest::Test
 end
 
 describe "spec/with::'punctuation'" do
- it "passes" do
-   pass
- end
+  it "passes" do
+    pass
+  end
 end
 
 describe "spec/with::\"doublequotes\"" do
- it 'will "pass"' do
-   pass
- end
+  it 'will "pass"' do
+    pass
+  end
 end
 
 describe 'spec/with::long_file_name' * 100 do
