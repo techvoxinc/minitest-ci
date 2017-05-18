@@ -18,6 +18,10 @@ module Minitest
     opts.on "--working-dir DIR", "Set the working dir. Default to #{Ci.working_dir}" do |dir|
       options[:working_dir] = dir
     end
+
+    opts.on "--report-name REPORT_NAME_OPTION", "Set report name option. Default to :test_name" do |report_name_option|
+      options[:report_name] = report_name_option
+    end
   end
 
 end

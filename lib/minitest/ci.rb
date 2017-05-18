@@ -132,7 +132,18 @@ module Minitest
     end
 
     def report_name(name)
-      "TEST-#{CGI.escape(name.to_s.gsub(/\W+/, '_'))}.xml"[0, 255]
+      report_name_opt = options.fetch(:report_name, :test_name)
+      return report_name_opt.call(name) if report_name_opt.is_a? Proc
+      return sha1_report_name(name) if report_name_opt.to_sym == :sha1
+      test_name_report_name(name)
+    end
+
+    def sha1_report_name(name)
+      "TEST-#{Digest::SHA1.hexdigest(name.to_s)}.xml"
+    end
+
+    def test_name_report_name(name)
+      "TEST-#{CGI.escape(name.to_s.gsub(/\W+/, '_'))[0, 246]}.xml"
     end
   end
 end
