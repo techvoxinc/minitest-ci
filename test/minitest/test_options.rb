@@ -27,7 +27,7 @@ reporter.report
 class TestMinitest; end
 class TestMinitest::TestOptions < Minitest::Test
   def test_filename_is_sha1_digest
-    sha1 = Digest::SHA1.hexdigest("spec with this name should be transformed in sha1")
+    sha1 = Digest::SHA1.hexdigest("report with this name should be transformed in sha1")
     assert File.exist? "test/reports/TEST-#{sha1}.xml"
   end
 end
