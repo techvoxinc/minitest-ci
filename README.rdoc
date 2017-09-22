@@ -80,6 +80,18 @@ Alternatively, you can add the following code to your test runner setup:
     end
     task :test => %w[ci_cleanup test:one test:two]
 
+To configure report filename, use the `report_name` option like
+
+    Minitest::Ci.new $ci_io, { :report_name => :sha1 }
+
+or like
+
+    machine:
+      environment:
+        TESTOPTS: "--report-name=sha1"
+
+Supported options are: `:test_name` (default), `:sha1`, or a `Proc` (not supported through ENV var)
+
 == REQUIREMENTS:
 
 * Minitest > version 5
