@@ -6,7 +6,7 @@
 
 == DESCRIPTION:
 
-Minitest reporter plugin for [CircleCI](https://circleci.com/).
+Minitest reporter plugin for CircleCI[https://circleci.com/].
 
 This gem was made possible by YP.com
 
