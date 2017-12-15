@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'cgi'
 require 'time'
+require 'digest'
 
 module Minitest
   def self.plugin_ci_options opts, options
