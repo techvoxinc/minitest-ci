@@ -139,7 +139,7 @@ module Minitest
                      result.method(result.name).source_location
                    end[0].gsub(base, '')
         xml << "  <testcase time='%6f' file=%p name=%p assertions='%s'>" %
-          [result.time, escape(location), escape(result.name), result.assertions]
+          [result.time, escape(location), "#{escape(name)}_#{escape(result.name)}", result.assertions]
         if failure = result.failure
           label = failure.result_label.downcase
 
